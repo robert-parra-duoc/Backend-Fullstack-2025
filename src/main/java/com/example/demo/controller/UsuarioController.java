@@ -44,10 +44,10 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario nuevoUsuario) {
     // Forzar que cualquier usuario registrado sea "usuario"
-    nuevoUsuario.setRol("usuario");
+        nuevoUsuario.setRol("usuario");
 
-    Usuario guardado = usuarioRepository.save(nuevoUsuario);
-    return ResponseEntity.ok(guardado);
+        Usuario guardado = usuarioRepository.save(nuevoUsuario);
+        return ResponseEntity.ok(guardado);
     }
 
 

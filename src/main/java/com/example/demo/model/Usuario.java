@@ -20,7 +20,7 @@ public class Usuario {
     private String contrasena;
 
     @Column(nullable = false)
-    private String rol;
+    private String rol; 
 
     public Long getId() {
         return id;
@@ -52,5 +52,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getRol() {         
+        return rol;
+    }
+
+    public void setRol(String rol) {  
+        this.rol = rol;
     }
 }
