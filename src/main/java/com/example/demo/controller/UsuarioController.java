@@ -35,13 +35,23 @@ public class UsuarioController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    //@PostMapping
+    //public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario nuevoUsuario) {
+    //    Usuario guardado = usuarioRepository.save(nuevoUsuario);
+    //    return ResponseEntity.ok(guardado);
+    //}
+
     @PostMapping
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario nuevoUsuario) {
-        Usuario guardado = usuarioRepository.save(nuevoUsuario);
-        return ResponseEntity.ok(guardado);
+    // Forzar que cualquier usuario registrado sea "usuario"
+    nuevoUsuario.setRol("usuario");
+
+    Usuario guardado = usuarioRepository.save(nuevoUsuario);
+    return ResponseEntity.ok(guardado);
     }
 
-        // LOGIN
+
+    // LOGIN
     @PostMapping("/login")
     public ResponseEntity<Usuario> login(@RequestBody LoginRequest loginRequest) {
 
