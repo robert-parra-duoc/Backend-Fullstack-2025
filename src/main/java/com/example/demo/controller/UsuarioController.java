@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.dto.LoginRequest;
+import org.springframework.http.HttpStatus;
+
+
 @RestController
 @RequestMapping("/api/usuarios")
 @CrossOrigin(origins = "*")
@@ -35,6 +39,16 @@ public class UsuarioController {
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario nuevoUsuario) {
         Usuario guardado = usuarioRepository.save(nuevoUsuario);
         return ResponseEntity.ok(guardado);
+    }
+
+        // LOGIN
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> login(@RequestBody LoginRequest loginRequest) {
+
+        return usuarioRepository
+                .findByCorreoAndContrasena(loginRequest.getCorreo(), loginRequest.getContrasena())
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
     @PutMapping("/{id}")
